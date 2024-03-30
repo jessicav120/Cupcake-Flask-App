@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupcakes Galore</title>
+</head>
+<body>
+    <h1>Cupcakes Galore!</h1>
+    <hr>
+    <h2>Add a Cupcake!</h2>
+
+    <form action='/api/cupcakes' method="POST" id="add-cupcake-form">
+        {{ form.hidden_tag() }}
+        <div>
+            {{form.flavor.label}}
+            {{form.flavor(placeholder=("cupcake flavor"))}}
+        </div>
+        <div>
+            {{form.rating.label}}
+            {{form.rating(placeholder=("1 to 10"))}}
+        </div>
+        <div>
+            {{form.size.label}}
+            {{form.size}}
+        </div>
+        <div>
+            {{form.image.label}}
+            {{form.image(placeholder=("URL"))}}
+        </div>
+
+        <button type='submit'>Submit</button>
+    <form>
+
+    <hr>
+
+    <h2>Current Cupcakes</h2>
+
+    <ul id='cupcakes'></ul>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="../static/cupcakes.js"></script>
+</body>
+</html>

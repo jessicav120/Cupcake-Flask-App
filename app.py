@@ -1,22 +1,25 @@
 """Flask app for Cupcakes"""
-from flask import Flask, request, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, request, jsonify, render_template
 from models import db, connect_db, Cupcake
+from form import AddCupcakeForm
 
 app = Flask(__name__)
-app.app_context().push()
 
 #-----App config--------------
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes_test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
 app.config['SECRET_KEY'] = 'kikostinky'
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
 #  ---------- ROUTES -----------------------
+@app.route('/')
+def home_page():
+    '''Show homepage'''
+    form = AddCupcakeForm()
+    return render_template("index.html", form=form)
+    
 @app.route('/api/cupcakes', methods=["GET", "POST"])
-def show_all_cupcakes():
+def show_add_cupcakes():
     '''Show list of all cupcakes & handle adding new cupcake'''
     
     if request.method == "POST":
